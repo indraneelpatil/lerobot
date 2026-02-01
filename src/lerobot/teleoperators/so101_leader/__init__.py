@@ -16,3 +16,4 @@
 
 from .config_so101_leader import SO101LeaderConfig
 from .so101_leader import SO101Leader
+from .so101_leader_with_interventions import SO101LeaderWithIntervention
