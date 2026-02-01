@@ -56,7 +56,7 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
     motor_names: list[str]
     use_gripper: bool = False
     gripper_threshold: float = 5
-    error_buf: np.ndarray
+    error_buf: np.ndarray = np.zeros(3)
     def complementary_data(self, complementary_data: dict) -> dict:
         """
         Converts teleop_action from joint space to delta x, y, z format.
@@ -134,7 +134,7 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
             # Compute delta as an exponential function of error_buf
             error = teleop_ee_pos - current_ee_pos
             self.error_buf += error
-            delta_pos = self.error_buf * 0.05
+            delta_pos = self.error_buf * 0.5
             self.error_buf -= error  # keep error_buf unchanged after computing delta_pos
 
             # Extract gripper position if available
