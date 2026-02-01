@@ -54,7 +54,10 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
 
     kinematics: RobotKinematics
     motor_names: list[str]
+<<<<<<< HEAD
     error_buf: np.ndarray
+=======
+>>>>>>> 425a8cf (All changes squashed)
     use_gripper: bool = False
     gripper_threshold: float = 5
     def complementary_data(self, complementary_data: dict) -> dict:
@@ -131,11 +134,16 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
             teleop_ee_pos = teleop_ee_transform[:3, 3]
             current_ee_pos = current_ee_transform[:3, 3]
 
+<<<<<<< HEAD
             # Compute delta as an exponential function of error_buf
             error = teleop_ee_pos - current_ee_pos
             self.error_buf += error
             delta_pos = self.error_buf * 0.5
             self.error_buf -= error  # keep error_buf unchanged after computing delta_pos
+=======
+            # Compute delta
+            delta_pos = teleop_ee_pos - current_ee_pos
+>>>>>>> 425a8cf (All changes squashed)
 
             # Extract gripper position if available
             gripper_value = 1.0  # Default gripper value
@@ -208,4 +216,8 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
         Returns:
             The unchanged features dictionary.
         """
+<<<<<<< HEAD
         return features
+=======
+        return features
+>>>>>>> 425a8cf (All changes squashed)
