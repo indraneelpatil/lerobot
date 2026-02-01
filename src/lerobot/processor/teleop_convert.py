@@ -56,7 +56,7 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
     motor_names: list[str]
     use_gripper: bool = False
     gripper_threshold: float = 5
-    error_buf: np.ndarray = np.zeros(3)
+    error_buf: np.ndarray | None = None
     def complementary_data(self, complementary_data: dict) -> dict:
         """
         Converts teleop_action from joint space to delta x, y, z format.
