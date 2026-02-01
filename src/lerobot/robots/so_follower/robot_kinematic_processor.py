@@ -20,6 +20,7 @@ from typing import Any
 import numpy as np
 
 from lerobot.configs.types import FeatureType, PipelineFeatureType, PolicyFeature
+from lerobot.teleoperators.utils import TeleopEvents
 from lerobot.model.kinematics import RobotKinematics
 from lerobot.processor import (
     EnvTransition,
@@ -117,12 +118,21 @@ class EEReferenceAndDelta(RobotActionProcessorStep):
                 if not self._prev_enabled or self.reference_ee_pose is None:
                     self.reference_ee_pose = t_curr.copy()
                 ref = self.reference_ee_pose if self.reference_ee_pose is not None else t_curr
+            
+            info = self.transition.get(TransitionKey.INFO, {})
+            being_teleoperated = info.get(TeleopEvents.IS_INTERVENTION, False)
+
+            if being_teleoperated:
+                scale_factor = 0.5
+                scaling = {"x": scale_factor, "y": scale_factor, "z": scale_factor}
+            else:
+                scaling = self.end_effector_step_sizes
 
             delta_p = np.array(
                 [
-                    tx * self.end_effector_step_sizes["x"],
-                    ty * self.end_effector_step_sizes["y"],
-                    tz * self.end_effector_step_sizes["z"],
+                    tx * scaling["x"],
+                    ty * scaling["y"],
+                    tz * scaling["z"],
                 ],
                 dtype=float,
             )
