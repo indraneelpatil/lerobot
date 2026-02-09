@@ -78,6 +78,7 @@ from .tokenizer_processor import ActionTokenizerProcessorStep, TokenizerProcesso
 from .degrees_action_processor import Degrees2RadiansActionProcessorStep
 from .radians_observation_processor import Radians2DegreesObservationProcessor
 from .add_processor_observations_to_state import AddProcessorObservationsToState
+from .teleop_convert import TeleopConvertJointToDeltaStep
 
 __all__ = [
     "ActionProcessorStep",
@@ -133,5 +134,6 @@ __all__ = [
     "VanillaObservationProcessorStep",
     "Degrees2RadiansActionProcessorStep",
     "Radians2DegreesObservationProcessor",
-    "AddProcessorObservationsToState"
+    "AddProcessorObservationsToState",
+    "TeleopConvertJointToDeltaStep"
 ]
