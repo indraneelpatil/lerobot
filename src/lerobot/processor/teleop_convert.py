@@ -208,8 +208,4 @@ class TeleopConvertJointToDeltaStep(ComplementaryDataProcessorStep):
         Returns:
             The unchanged features dictionary.
         """
-<<<<<<< HEAD
         return features
-=======
-        return features
->>>>>>> 425a8cf (All changes squashed)
